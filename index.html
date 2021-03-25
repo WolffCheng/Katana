@@ -20,8 +20,11 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-	<link rel="stylesheet" href="./css/style.css">
+
 	<script src="./js/main.js"></script>
+
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/183516/gilroy-webfont.css">
 
 </head>
 
@@ -49,12 +52,195 @@
 		<div id="nav_bar_m">
 			<img src="./img/logo.png" alt="">
 			<b>Katana かたな</b>
-			<div id="panel_m">
+
+			<!-- <div id="panel_m">
 				<img src="./img/66.png" alt="">
 				<b class="nav_item nav_item_m1" onclick="JumpContent('#sec_2')">ABOUT</b>
 				<b class="nav_item nav_item_m2" onclick="JumpContent('#sec_3')">MASTERPIECES</b>
 				<b class="nav_item nav_item_m3" onclick="JumpContent('#sec_4')">CONTACT</b>
+			</div> -->
+
+			<div  id="panel_m">
+				<img src="./img/66.png" alt="">
+				<ul class="Menu-list" data-offset="10">
+					
+
+					<li class="nav_item_m1 Menu-list-item" data-offset="16" onclick="JumpContent('#sec_2')">
+						About
+						<span class="Mask"><span>About</span></span>
+						<span class="Mask"><span>About</span></span>
+					</li>
+
+					<li class="nav_item_m2 Menu-list-item" data-offset="10" onclick="JumpContent('#sec_3')">
+						MASTER
+						<span class="Mask"><span>MASTER</span></span>
+						<span class="Mask"><span>MASTER</span></span>
+					</li>
+
+					<li class="nav_item_m3 Menu-list-item" data-offset="8" onclick="JumpContent('#sec_4')">
+						Contact
+						<span class="Mask"><span>Contact</span></span>
+						<span class="Mask"><span>Contact</span></span>
+					</li>
+
+				</ul>
 			</div>
+
+
+			<style>
+				body {
+					font-family: "Gilroy ExtraBold", system-ui, sans-serif;
+					font-style: normal;
+					font-weight: normal;
+					-webkit-font-smoothing: antialiased;
+					-webkit-font-kerning: normal;
+					-webkit-text-size-adjust: 100%;
+				}
+
+
+
+				/* html,
+				body {
+					width: 100vw;
+					height: 100vh;
+				}
+
+				body {
+					background: linear-gradient(45deg, #02001f, #1f1b4e);
+					transform-style: preserve-3d;
+					transform: perspective(60rem);
+					position: fixed;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				} */
+
+				.Menu-list {
+					margin-top: 70%;
+
+					
+					font-size: 4.25rem;
+					line-height: 1.2;
+					text-transform: uppercase;
+					text-align: center;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					transform: rotateX(-10deg) rotateY(20deg);
+				}
+
+				.Menu-list-item {
+					position: relative;
+					color: transparent;
+					cursor: pointer;
+				}
+
+				.Menu-list-item::before {
+					content: "";
+					display: block;
+					position: absolute;
+					top: 49%;
+					left: -10%;
+					right: -10%;
+					height: 4px;
+					border-radius: 4px;
+					margin-top: -2px;
+					background: #fff7af;
+					transform: scale(0) translateX(0px)  skewY(0deg);
+					transition: transform 0.3s cubic-bezier(0.16, 1.08, 0.38, 0.98);
+					z-index: 1;
+				}
+
+				.Mask {
+					display: block;
+					position: absolute;
+					overflow: hidden;
+					color: #b59b60;
+					top: 0;
+					height: 49%;
+					transition: all 0.8s cubic-bezier(0.16, 1.08, 0.38, 0.98);
+					transform: skewX(0deg) translateX(0px) skewY(0deg);
+				}
+
+				.Mask span {
+					display: block;
+				}
+
+				.Mask+.Mask {
+					top: 48.9%;
+					height: 51.1%;
+				}
+
+				.Mask+.Mask span {
+					transform: translateY(-49%);
+				}
+
+				.Menu-list-item:hover .Mask,
+				.Menu-list-item:active .Mask {
+					color: rgba(255, 0, 0, 0.849);
+					transform: skewX(0deg) skewY(-5deg) translateX(3px) translateY(-5px);
+				}
+
+				.Menu-list-item:hover .Mask+.Mask,
+				.Menu-list-item:active .Mask+.Mask {
+					transform: skewX(0deg) skewY(-5deg) translateX(-3px) translateY(5px);
+				}
+
+				.Menu-list-item:hover::before,
+				.Menu-list-item:active::before {
+					transform: scale(1) translateX(0px) skewY(-5deg) skewX(270deg);
+				}
+			</style>
+
+
+			<script>
+				var $menu = $('.Menu-list'),
+					$item = $('.Menu-list-item'),
+					w = $(window).width(), //window width
+					h = $(window).height(); //window height
+
+				$(window).on('mousemove', function (e) {
+					var offsetX = 0.5 - e.pageX / w, //cursor position X
+						offsetY = 0.5 - e.pageY / h, //cursor position Y
+						dy = e.pageY - h / 2, //@h/2 = center of poster
+						dx = e.pageX - w / 2, //@w/2 = center of poster
+						theta = Math.atan2(dy, dx), //angle between cursor and center of poster in RAD
+						angle = theta * 180 / Math.PI - 90, //convert rad in degrees
+						offsetPoster = $menu.data('offset'),
+						transformPoster = 'translate3d(0, ' + -offsetX * offsetPoster + 'px, 0) rotateX(' + (-offsetY * offsetPoster) + 'deg) rotateY(' + (offsetX * (offsetPoster * 2)) + 'deg)';
+					//poster transform
+
+					//get angle between 0-360
+					if (angle < 0) {
+						angle = angle + 360;
+					}
+
+					//poster transform
+					$menu.css('transform', transformPoster);
+
+					//parallax for each layer
+					$item.each(function () {
+						var $this = $(this),
+							offsetLayer = $this.data('offset') || 0,
+							transformLayer = 'translate3d(' + offsetX * offsetLayer + 'px, ' + offsetY * offsetLayer + 'px, 20px)';
+
+						$this.css('transform', transformLayer);
+					});
+				});
+			</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 			<div class="info_btn_m">
 				<div class="line_m"></div>

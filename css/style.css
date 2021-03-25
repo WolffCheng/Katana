@@ -360,23 +360,21 @@ img {
 
 .nav_item_m1 {
     top: 30%;
-    left: 50%;
-    /* margin-left: -60px; */
-    margin-left: 30px;
+    left: 10%;
+    /* margin-left: 30px; */
 }
 
 .nav_item_m2 {
     top: 40%;
-    left: 50%;
-    /* margin-left: -140px; */
-    margin-left: -210px;
+    left: 5%;
+    /* margin-left: -210px; */
 }
 
 .nav_item_m3 {
     top: 50%;
-    left: 50%;
+    left: 0%;
     /* margin-left: -155px; */
-    margin-left: -250px;
+    /* margin-left: -250px; */
 }
 
 #panel_m {
